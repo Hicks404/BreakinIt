@@ -7,6 +7,7 @@ using std::string;
 using std::vector;
 
 class Actor;
+class Ball;
 
 class Game
 {
@@ -20,12 +21,15 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 
+	Ball* GetBall();
+
 private:
 	int m_width;
 	int m_height;
 	string m_title;
 	Color m_clrColor;
 
+	Ball* m_ball;
 	vector<Actor*> m_actors;
 
 private:

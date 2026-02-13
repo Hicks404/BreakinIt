@@ -4,6 +4,9 @@
 #include "Actor.h"
 #include "Paddle.h"
 #include "Brick.h"
+#include "Ball.h"
+#include "Score.h"
+#include <ctime>
 
 Game::Game(int w, int h, string title, Color clrColor)
 	: m_width{ w }, m_height{ h }, m_title{ title }, m_clrColor{ clrColor }
@@ -12,20 +15,23 @@ Game::Game(int w, int h, string title, Color clrColor)
 	int brickYCount = 6;
 	float padding = 5.f;
 
-	Vector2 brickSize = { (w * .8f) / brickXCount - padding, (h * .4f) / brickYCount - padding };
+	Vector2 brickSize = { (w * .97f) / brickXCount - padding, (h * .4f) / brickYCount - padding };
 	for (int x = 0; x < brickXCount; ++x)
 	{
 		for (int y = 0; y < brickYCount; ++y)
 		{
 			Vector2 brickPos =
 			{
-				x * (brickSize.x + padding) + brickSize.x / 2 + w * .095f,
-				y * (brickSize.y + padding) + y * brickSize.y / 2 + h * .05f
+				x * (brickSize.x + padding) + brickSize.x / 2 + w * .015f,
+				y * (brickSize.y + padding) + y * brickSize.y / 15 + h * .05f
 			};
 
 			m_actors.emplace_back(new Brick{ brickPos, brickSize, this });
 		}
 	}
+
+	m_ball = new Ball{ this };
+	m_actors.emplace_back(m_ball);
 
 	m_actors.emplace_back(new Paddle{ this });
 }
@@ -78,8 +84,15 @@ int Game::GetHeight() const
 	return m_height;
 }
 
+Ball* Game::GetBall()
+{
+	return m_ball;
+}
+
 void Game::BeginPlay()
 {
+	SetRandomSeed(time(nullptr));
+
 	for (Actor* actor : m_actors)
 	{
 		actor->BeginPlay();
