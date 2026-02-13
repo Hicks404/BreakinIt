@@ -3,8 +3,7 @@
 class Score : public Actor
 {
 public:
-	int score;
-	int deaths;
+	Score(Game* game);
 
 public:
 	void BeginPlay() override;

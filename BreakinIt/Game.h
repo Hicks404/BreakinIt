@@ -21,6 +21,9 @@ public:
 	int GetWidth() const;
 	int GetHeight() const;
 
+	int GetScore();
+	void AddScore(int amount);
+
 	Ball* GetBall();
 
 private:
@@ -28,6 +31,8 @@ private:
 	int m_height;
 	string m_title;
 	Color m_clrColor;
+
+	int m_score;
 
 	Ball* m_ball;
 	vector<Actor*> m_actors;

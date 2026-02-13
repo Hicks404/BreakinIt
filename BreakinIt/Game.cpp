@@ -34,6 +34,8 @@ Game::Game(int w, int h, string title, Color clrColor)
 	m_actors.emplace_back(m_ball);
 
 	m_actors.emplace_back(new Paddle{ this });
+
+	m_actors.emplace_back(new Score{ this });
 }
 
 Game::~Game()
@@ -87,6 +89,16 @@ int Game::GetHeight() const
 Ball* Game::GetBall()
 {
 	return m_ball;
+}
+
+int Game::GetScore()
+{
+	return m_score;
+}
+
+void Game::AddScore(int amount)
+{
+	m_score += amount;
 }
 
 void Game::BeginPlay()

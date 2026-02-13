@@ -1,6 +1,7 @@
 #include "Brick.h"
 #include "Ball.h"
 #include "Game.h"
+#include "Score.h"
 #include <raymath.h>
 #include <iostream>
 
@@ -29,6 +30,7 @@ void Brick::Tick(float dt)
 		//ball->velocity.x += GetRandomValue(-1.f, 1.f);
 		//std::cout <<  
 		ball->moveSpeed *= 1.05;
+		m_game->AddScore(1);
 	}
 }
 
