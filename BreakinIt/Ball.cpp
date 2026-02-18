@@ -12,7 +12,8 @@ Ball::Ball(Game* game)
 
 void Ball::BeginPlay()
 {
-	float dir = GetRandomValue( - 9, 9) * 0.1f;
+	//float dir = GetRandomValue( - 9, 9) * 0.1f;
+	float dir = 0;
 	velocity.x = dir;
 
 	//velocity = Vector2Normalize(velocity);
@@ -39,6 +40,7 @@ void Ball::Tick(float dt)
 	if (location.y > m_game->GetHeight() - radius)
 	{
 		location = { m_game->GetWidth() * 0.5f, m_game->GetHeight() * 0.5f };
+		m_game->AddDeath(1);
 	}
 }
 

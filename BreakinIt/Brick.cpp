@@ -6,15 +6,30 @@
 #include <iostream>
 
 Brick::Brick(Vector2 location, Vector2 size, Game* game)
-	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game }, isBroken{ false }
+	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game }, isBroken{ false }, breakframe{ 1500 }
 {
 
 }
 
+void Brick::breaking()
+{
+	breakframe -= 1;
+	//std::cout << breakframe << "\n";
+
+	size.x -= 0.1f;
+	size.y += 0.05f;
+}
+
 void Brick::Tick(float dt)
 {
+	if (breakframe <= 0)
+	{
+		return;
+	}
+
 	if (isBroken)
 	{
+		breaking();
 		return;
 	}
 
@@ -26,17 +41,16 @@ void Brick::Tick(float dt)
 	{
 		//ball collide
 		isBroken = true;
+
 		ball->velocity.y *= -1;
-		//ball->velocity.x += GetRandomValue(-1.f, 1.f);
-		//std::cout <<  
-		ball->moveSpeed *= 1.05;
+		ball->moveSpeed *= 1.02;
 		m_game->AddScore(1);
 	}
 }
 
 void Brick::Render()
 {
-	if (isBroken)
+	if (breakframe <= 0)
 	{
 		return;
 	}

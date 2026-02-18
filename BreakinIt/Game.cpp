@@ -9,7 +9,7 @@
 #include <ctime>
 
 Game::Game(int w, int h, string title, Color clrColor)
-	: m_width{ w }, m_height{ h }, m_title{ title }, m_clrColor{ clrColor }
+	: m_width{ w }, m_height{ h }, m_title{ title }, m_clrColor{ clrColor }, m_level{ 1 }
 {
 	int brickXCount = 7;
 	int brickYCount = 6;
@@ -96,9 +96,29 @@ int Game::GetScore()
 	return m_score;
 }
 
+int Game::GetDeath()
+{
+	return m_death;
+}
+
+int Game::GetLevel()
+{
+	return m_level;
+}
+
 void Game::AddScore(int amount)
 {
 	m_score += amount;
+}
+
+void Game::AddDeath(int amount)
+{
+	m_death += amount;
+}
+
+void Game::AddLevel(int amount)
+{
+	m_level += amount;
 }
 
 void Game::BeginPlay()

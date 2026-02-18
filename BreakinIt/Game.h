@@ -22,7 +22,11 @@ public:
 	int GetHeight() const;
 
 	int GetScore();
+	int GetDeath();
+	int GetLevel();
 	void AddScore(int amount);
+	void AddDeath(int amount);
+	void AddLevel(int amount);
 
 	Ball* GetBall();
 
@@ -33,6 +37,8 @@ private:
 	Color m_clrColor;
 
 	int m_score;
+	int m_death;
+	int m_level;
 
 	Ball* m_ball;
 	vector<Actor*> m_actors;
