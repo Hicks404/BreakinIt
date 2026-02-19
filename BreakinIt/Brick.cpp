@@ -6,18 +6,22 @@
 #include <iostream>
 
 Brick::Brick(Vector2 location, Vector2 size, Game* game)
-	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game }, isBroken{ false }, breakframe{ 1500 }
+	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game }, isBroken{ false }, breakframe{ 1500 }, spawning{ 0 }, savedsize{ size }
 {
+	
+}
 
+void Brick::apppear()
+{
+	spawning += 1;
 }
 
 void Brick::breaking()
 {
 	breakframe -= 1;
 	//std::cout << breakframe << "\n";
-
-	size.x -= 0.1f;
-	size.y += 0.05f;
+	size.x -= 0.00069f*savedsize.x;
+	size.y += 0.00054f*savedsize.y;
 }
 
 void Brick::Tick(float dt)
@@ -55,5 +59,13 @@ void Brick::Render()
 		return;
 	}
 
-	DrawRectanglePro({ location.x, location.y, size.x, size.y }, { size.x * 0.5f, size.y * 0.5f }, 0.f, color);
+	if (spawning < 1000)
+	{
+		DrawRectanglePro({ location.x, location.y, size.x * spawning / 1000, size.y * spawning / 1000 }, { size.x * 0.5f, size.y * 0.5f }, 0.f, color);
+		apppear();
+	}
+	else
+	{
+		DrawRectanglePro({ location.x, location.y, size.x, size.y }, { size.x * 0.5f, size.y * 0.5f }, 0.f, color);
+	}
 }

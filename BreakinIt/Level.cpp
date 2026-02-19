@@ -1,13 +1,17 @@
 #include "Level.h"
 #include "Game.h"
-#include "Brick.h"
 
 #include <iostream>
 #include <string>
 using std::string;
 
+#define score m_game->GetScore()
+#define w m_game->GetWidth()
+#define h m_game->GetHeight()
+#define level m_game->GetLevel()
+
 Level::Level(Game* game)
-	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game }
+	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game }, brickcount{ 0 }, totalcount{ 0 }
 {
 	
 }
@@ -15,19 +19,25 @@ Level::Level(Game* game)
 void Level::LoadLevel(int Level)
 {
 	float padding = 5.f;
-
-	int Layout[][2] = {
+	
+	const int Layout[][2] = {
+		//{7,6},
+		{1,1},
+		{3,2},
+		{4,3},
+		{5,6},
 		{7,6},
-		{7,6}
+		{8,8},
+		{10,8}
 	};
 
 	int brickXCount = Layout[Level - 1][0];
 	int brickYCount = Layout[Level - 1][1];
-
-	int w = m_game->GetWidth();
-	int h = m_game->GetHeight();
+	brickcount = brickXCount * brickYCount;
+	totalcount += brickcount;
 
 	Vector2 brickSize = { (w * .97f) / brickXCount - padding, (h * .4f) / brickYCount - padding };
+	//std::cout << brickXCount << " " << brickSize.x << "\n";
 	for (int x = 0; x < brickXCount; ++x)
 	{
 		for (int y = 0; y < brickYCount; ++y)
@@ -38,16 +48,32 @@ void Level::LoadLevel(int Level)
 				y * (brickSize.y + padding) + y * brickSize.y / 15 + h * .05f
 			};
 
-			m_actors.emplace_back(new Brick{ brickPos, brickSize, this });
+			//std::cout << x << " " << y << "\n";
+			if (brickPos.x && brickPos.y)
+			{
+				//std::cout << 3;
+				m_game->PlaceBrick(brickPos, brickSize);
+			}
 		}
 	}
 }
 
 void Level::BeginPlay()
-{}
+{
+	LoadLevel(level);
+}
 
 void Level::Tick(float dt)
-{}
+{
+	if (score == totalcount)
+	{
+		m_game->AddLevel(1);
+		LoadLevel(level);
+		//std::cout << totalcount;
+	}
+}
 
 void Level::Render()
-{}
+{
+	
+}

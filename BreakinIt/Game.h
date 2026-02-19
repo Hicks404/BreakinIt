@@ -28,6 +28,8 @@ public:
 	void AddDeath(int amount);
 	void AddLevel(int amount);
 
+	void PlaceBrick(Vector2 brickPos, Vector2 brickSize);
+
 	Ball* GetBall();
 
 private:

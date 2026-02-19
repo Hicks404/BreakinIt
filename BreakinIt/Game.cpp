@@ -6,12 +6,13 @@
 #include "Brick.h"
 #include "Ball.h"
 #include "Score.h"
+#include "Level.h"
 #include <ctime>
 
 Game::Game(int w, int h, string title, Color clrColor)
-	: m_width{ w }, m_height{ h }, m_title{ title }, m_clrColor{ clrColor }, m_level{ 1 }
+	: m_width{ w }, m_height{ h }, m_title{ title }, m_clrColor{ clrColor }, m_level{ 1 }, m_score{ 0 }, m_death{ 0 }
 {
-	int brickXCount = 7;
+	/*int brickXCount = 7;
 	int brickYCount = 6;
 	float padding = 5.f;
 
@@ -28,7 +29,7 @@ Game::Game(int w, int h, string title, Color clrColor)
 
 			m_actors.emplace_back(new Brick{ brickPos, brickSize, this });
 		}
-	}
+	}*/
 
 	m_ball = new Ball{ this };
 	m_actors.emplace_back(m_ball);
@@ -36,6 +37,8 @@ Game::Game(int w, int h, string title, Color clrColor)
 	m_actors.emplace_back(new Paddle{ this });
 
 	m_actors.emplace_back(new Score{ this });
+
+	m_actors.emplace_back(new Level{ this });
 }
 
 Game::~Game()
@@ -119,6 +122,11 @@ void Game::AddDeath(int amount)
 void Game::AddLevel(int amount)
 {
 	m_level += amount;
+}
+
+void Game::PlaceBrick(Vector2 brickPos, Vector2 brickSize)
+{
+	m_actors.emplace_back(new Brick{ brickPos, brickSize, this });
 }
 
 void Game::BeginPlay()

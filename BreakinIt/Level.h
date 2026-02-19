@@ -6,11 +6,11 @@ class Level : public Actor
 public:
 	Level(Game* game);
 
+	int brickcount;
+	int totalcount;
+
 public:
 	void LoadLevel(int Level);
-
-private:
-	vector<Actor*> m_actors;
 
 public:
 	void BeginPlay() override;
