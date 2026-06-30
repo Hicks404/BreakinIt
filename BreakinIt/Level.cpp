@@ -11,13 +11,15 @@ using std::string;
 #define level m_game->GetLevel()
 
 Level::Level(Game* game)
-	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game }, brickcount{ 0 }, totalcount{ 0 }
+	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game, 0 }, brickcount{ 0 }, totalcount{ 0 }
 {
 	
 }
 
 void Level::LoadLevel(int Level)
 {
+	m_game->ClearBricks();
+
 	float padding = 5.f;
 	
 	const int Layout[][2] = {
@@ -69,7 +71,6 @@ void Level::Tick(float dt)
 	{
 		m_game->AddLevel(1);
 		LoadLevel(level);
-		//std::cout << totalcount;
 	}
 }
 

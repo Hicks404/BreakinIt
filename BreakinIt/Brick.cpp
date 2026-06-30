@@ -6,7 +6,7 @@
 #include <iostream>
 
 Brick::Brick(Vector2 location, Vector2 size, Game* game)
-	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game }, isBroken{ false }, breakframe{ 1500 }, spawning{ 0 }, savedsize{ size }
+	: Actor{ location, size, ColorFromHSV(GetRandomValue(0, 360), 1.f, 1.f), game, 4 }, isBroken{ false }, breakframe{ 1500 }, spawning{ 0 }, savedsize{ size }
 {
 	
 }
@@ -19,7 +19,6 @@ void Brick::apppear()
 void Brick::breaking()
 {
 	breakframe -= 1;
-	//std::cout << breakframe << "\n";
 	size.x -= 0.00069f*savedsize.x;
 	size.y += 0.00054f*savedsize.y;
 }

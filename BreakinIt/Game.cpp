@@ -124,6 +124,16 @@ void Game::AddLevel(int amount)
 	m_level += amount;
 }
 
+void Game::ClearBricks()
+{
+	for (Actor* actor : m_actors)
+	{
+		std::erase_if(m_actors, [actor](Actor* actor2) {
+			return actor == actor2 && actor->obj == 4;
+			});
+	}
+}
+
 void Game::PlaceBrick(Vector2 brickPos, Vector2 brickSize)
 {
 	m_actors.emplace_back(new Brick{ brickPos, brickSize, this });

@@ -5,7 +5,7 @@
 #include <raymath.h>
 
 Paddle::Paddle(Game* game)
-	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() - 20.f }, {75.f, 20.f}, WHITE, game}, m_speed{ 800.f }
+	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() - 20.f }, {75.f, 20.f}, WHITE, game, 2}, m_speed{ 800.f }
 {
 
 }

@@ -10,9 +10,10 @@ public:
 	Vector2 location;
 	Vector2 size;
 	Color color;
+	int obj;
 
 public:
-	Actor(Vector2 location, Vector2 size, Color color, Game* game);
+	Actor(Vector2 location, Vector2 size, Color color, Game* game, int obj);
 	~Actor();
 
 public:

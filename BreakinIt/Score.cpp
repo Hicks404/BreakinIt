@@ -9,7 +9,7 @@ using std::string;
 #define level m_game->GetLevel()
 
 Score::Score(Game* game)
-	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game }
+	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game, 3 }
 {
 
 }

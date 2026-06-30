@@ -4,7 +4,7 @@
 #include <raymath.h>
 
 Ball::Ball(Game* game)
-	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game},
+	: Actor{ { game->GetWidth() * 0.5f, game->GetHeight() * 0.5f }, {10.f, 10.f}, WHITE, game, 1},
 	velocity{ 0.5f, 0.5f }, moveSpeed{ 300.f }
 {
 	
